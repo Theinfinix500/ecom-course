@@ -25,5 +25,8 @@ jobs:
       - name: Install Dependencies
         run: npm i
 
-      - name: Code Linting
+      - name: Lint and Pretty
         run: npm run lint
+
+      - name: Test Code
+        run: npm run test:ci
