@@ -1,6 +1,10 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "rules": {
+    "comma-dangle": "off",
+    "prettier/prettier": ["error", { "trailingComma": "none" }]
+  },
   "overrides": [
     {
       "files": ["*.ts"],
@@ -49,9 +53,7 @@
         "plugin:@angular-eslint/template/accessibility",
         "plugin:prettier/recommended"
       ],
-      "rules": {
-        "prettier/prettier": ["error", { "parser": "angular" }]
-      }
+      "rules": {}
     }
   ]
 }
