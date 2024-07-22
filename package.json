@@ -10,11 +10,16 @@
     "test:ci": "ng test --no-watch --code-coverage --browsers=ChromeHeadless",
     "serve:ssr:ecom-lab-frontend": "node dist/ecom-lab-frontend/server/server.mjs",
     "lint": "ng lint",
+    "lint:scss": "stylelint '**/*.scss'",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,scss,html}": [
+    "*.{ts,html}": [
       "eslint --fix"
+    ],
+    "*.scss": [
+      "stylelint --fix",
+      "prettier --write"
     ]
   },
   "private": true,
@@ -30,6 +35,9 @@
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.3",
     "express": "^4.18.2",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -65,6 +73,10 @@
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "prettier-plugin-organize-imports": "^4.0.0",
+    "stylelint": "^16.7.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-prettier": "^5.0.2",
+    "stylelint-scss": "^6.4.1",
     "typescript": "~5.4.2",
     "typescript-eslint": "8.0.0-alpha.38"
   }
