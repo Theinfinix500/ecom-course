@@ -1,0 +1,76 @@
+<div class="wrapper">
+  <div class="products">
+    <button class="go-back" [text]="true" pButton>
+      <i class="pi pi-arrow-left"><b>Products</b></i>
+    </button>
+  </div>
+  <div class="products-details">
+    <div class="small-image">
+      <p-image
+        src="https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg"
+        alt="Image"
+        width="70"
+        height="50" />
+    </div>
+    <div class="big-title">
+      <p><b>A Walk Amongst Friends - Canvas Print</b></p>
+      <span>Product Details</span>
+    </div>
+    <div class="remove-s">
+      <p-button label="Submit" icon="pi pi-trash" />
+      <p-button label="Save" [disabled]="true" />
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="panel">
+    <p-tabView>
+      <p-tabPanel header="Header I">
+        <p>Lorem ipsum dolor sit amet...</p>
+      </p-tabPanel>
+      <p-tabPanel header="Header II">
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium...
+        </p>
+      </p-tabPanel>
+      <p-tabPanel header="Header III">
+        <p>At vero eos et accusamus et iusto odio dignissimos...</p>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <div class="descrip">
+    <div class="flex flex-column gap-2">
+      <label for="username">Name</label>
+      <input pInputText id="username" aria-describedby="username-help" />
+    </div>
+    <div class="floatlabel">
+      <p-floatLabel>
+        <textarea id="float-input" rows="5" cols="30" pInputTextarea>
+        </textarea>
+        <label for="float-input">Description</label>
+      </p-floatLabel>
+    </div>
+    <div class="inputgrp1">
+      <p-inputGroup>
+        <input type="text" pInputText placeholder="Vote" />
+        <button
+          type="button"
+          pButton
+          icon="pi pi-times"
+          class="p-button-danger"></button>
+      </p-inputGroup>
+    </div>
+    <div class="inputgrp2">
+      <p-inputGroup>
+        <input type="text" pInputText placeholder="Vote" />
+        <button
+          type="button"
+          pButton
+          icon="pi pi-times"
+          class="p-button-danger"></button>
+      </p-inputGroup>
+    </div>
+  </div>
+</div>
