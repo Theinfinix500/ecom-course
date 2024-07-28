@@ -6,6 +6,13 @@ export const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
-    children: [{ path: '', component: WelcomeComponent }]
+    children: [
+      { path: '', component: WelcomeComponent },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./features/product/product.routes').then(r => r.routes)
+      }
+    ]
   }
 ];
