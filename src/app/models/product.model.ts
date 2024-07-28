@@ -3,5 +3,9 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  // Add any other fields you need
+  comparedPrice?: number;
+  stock: number;
+  categories: number[]; // Array of category IDs
+  images: string[]; // Array of image URLs
+  tags: string[]; // Array of tags
 }
