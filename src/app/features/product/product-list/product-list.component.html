@@ -6,13 +6,16 @@
   [rowsPerPageOptions]="[10, 25, 50]"
   [loading]="loading"
   [paginator]="true"
+  [lazy]="true"
+  [totalRecords]="totalRecords"
   [globalFilterFields]="[
     'name',
     'country.name',
     'representative.name',
     'status'
   ]"
-  [tableStyle]="{ 'min-width': '75rem' }">
+  [tableStyle]="{ 'min-width': '75rem' }"
+  (onLazyLoad)="loadProducts($event)">
   <ng-template pTemplate="caption">
     <div class="flex">
       <p-iconField iconPosition="left" class="ml-auto">

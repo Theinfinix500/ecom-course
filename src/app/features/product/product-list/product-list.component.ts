@@ -6,7 +6,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Table, TableModule } from 'primeng/table';
+import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ProductService } from '../products.service';
 
@@ -44,40 +44,17 @@ interface Product {
 export class ProductListComponent implements OnInit {
   products!: Product[];
 
-  // representatives!: Representative[];
-
   statuses!: any[];
 
   loading: boolean = true;
 
   activityValues: number[] = [0, 100];
   value: any;
+  totalRecords: number = 0;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService.getData().subscribe(products => {
-      this.products = products;
-      this.loading = false;
-
-      // this.products.forEach(
-      //   customer => (customer.date = new Date(<Date>customer.date))
-      // );
-    });
-
-    // this.representatives = [
-    //   { name: 'Amy Elsner', image: 'amyelsner.png' },
-    //   { name: 'Anna Fali', image: 'annafali.png' },
-    //   { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-    //   { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-    //   { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-    //   { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-    //   { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-    //   { name: 'Onyama Limba', image: 'onyamalimba.png' },
-    //   { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-    //   { name: 'Xuxue Feng', image: 'xuxuefeng.png' }
-    // ];
-
     this.statuses = [
       { label: 'Unqualified', value: 'unqualified' },
       { label: 'Qualified', value: 'qualified' },
@@ -86,6 +63,20 @@ export class ProductListComponent implements OnInit {
       { label: 'Renewal', value: 'renewal' },
       { label: 'Proposal', value: 'proposal' }
     ];
+  }
+
+  loadProducts(tableEvent: TableLazyLoadEvent) {
+    this.loading = true;
+    console.log(tableEvent);
+
+    const page = tableEvent.first! / tableEvent.rows! + 1;
+    const size = tableEvent.rows!;
+
+    this.productService.getProducts({ page, size }).subscribe(result => {
+      this.products = (result as any).data;
+      this.totalRecords = (result as any).count;
+      this.loading = false;
+    });
   }
 
   clear(table: Table) {
