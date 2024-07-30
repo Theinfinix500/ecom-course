@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   comparedPrice?: number;
   stock: number;
-  categories: number[]; // Array of category IDs
-  images: string[]; // Array of image URLs
-  tags: string[]; // Array of tags
+  categories: number[];
+  images: string[];
+  tags: string[];
 }

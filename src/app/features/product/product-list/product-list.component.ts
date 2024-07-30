@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { ProductService } from '../products.service';
+import { ProductService } from '../product.service';
 
 interface Product {
   id: number;
@@ -67,7 +67,6 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(tableEvent: TableLazyLoadEvent) {
     this.loading = true;
-    console.log(tableEvent);
 
     const page = tableEvent.first! / tableEvent.rows! + 1;
     const size = tableEvent.rows!;
