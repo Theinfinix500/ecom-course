@@ -7,9 +7,13 @@ import { inject, Injectable } from '@angular/core';
 export class ProductService {
   protected http: HttpClient = inject(HttpClient);
 
-  getProducts({ page = 1, size = 10 }) {
-    return this.http.get<{
-      data: any[];
-    }>(`http://localhost:3000/products?limit=${size}&page=${page}`);
+  getProducts({ page = 1, size = 10, sort = '', order = 'ASC' }) {
+    let request = `http://localhost:3000/products?limit=${size}&page=${page}`;
+
+    if (sort !== '') {
+      request = request + `&sort=${sort}&order=${order}`;
+    }
+
+    return this.http.get<{ data: any[] }>(request);
   }
 }
