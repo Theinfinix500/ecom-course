@@ -71,12 +71,16 @@ export class ProductListComponent implements OnInit {
 
     const page = tableEvent.first! / tableEvent.rows! + 1;
     const size = tableEvent.rows!;
+    const sort = tableEvent.sortField as string;
+    const order = tableEvent.sortOrder === 1 ? 'ASC' : 'DESC';
 
-    this.productService.getProducts({ page, size }).subscribe(result => {
-      this.products = (result as any).data;
-      this.totalRecords = (result as any).count;
-      this.loading = false;
-    });
+    this.productService
+      .getProducts({ page, size, sort, order })
+      .subscribe(result => {
+        this.products = (result as any).data;
+        this.totalRecords = (result as any).count;
+        this.loading = false;
+      });
   }
 
   clear(table: Table) {
