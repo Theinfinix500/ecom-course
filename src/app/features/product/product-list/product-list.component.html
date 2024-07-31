@@ -8,12 +8,7 @@
   [paginator]="true"
   [lazy]="true"
   [totalRecords]="totalRecords"
-  [globalFilterFields]="[
-    'name',
-    'country.name',
-    'representative.name',
-    'status'
-  ]"
+  [globalFilterFields]="globalFilterFields"
   [tableStyle]="{ 'min-width': '75rem' }"
   (onLazyLoad)="loadProducts($event)">
   <ng-template pTemplate="caption">
