@@ -51,6 +51,7 @@ export class ProductListComponent implements OnInit {
   activityValues: number[] = [0, 100];
   value: any;
   totalRecords: number = 0;
+  globalFilterFields: string[] = ['name', 'description'];
 
   constructor(private productService: ProductService) {}
 
@@ -72,9 +73,17 @@ export class ProductListComponent implements OnInit {
     const size = tableEvent.rows!;
     const sort = tableEvent.sortField as string;
     const order = tableEvent.sortOrder === 1 ? 'ASC' : 'DESC';
+    const globalFilter = tableEvent.globalFilter as string;
 
     this.productService
-      .getProducts({ page, size, sort, order })
+      .getProducts({
+        page,
+        size,
+        sort,
+        order,
+        globalFilter,
+        globalFilterFields: this.globalFilterFields
+      })
       .subscribe(result => {
         this.products = (result as any).data;
         this.totalRecords = (result as any).count;
