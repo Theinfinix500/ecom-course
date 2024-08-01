@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FilterMetadata } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -74,6 +75,7 @@ export class ProductListComponent implements OnInit {
     const sort = tableEvent.sortField as string;
     const order = tableEvent.sortOrder === 1 ? 'ASC' : 'DESC';
     const globalFilter = tableEvent.globalFilter as string;
+    const filters = tableEvent.filters as { [s: string]: FilterMetadata };
 
     this.productService
       .getProducts({
@@ -82,7 +84,8 @@ export class ProductListComponent implements OnInit {
         sort,
         order,
         globalFilter,
-        globalFilterFields: this.globalFilterFields
+        globalFilterFields: this.globalFilterFields,
+        filters
       })
       .subscribe(result => {
         this.products = (result as any).data;
