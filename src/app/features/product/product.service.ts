@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { FilterMetadata } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Product } from './product.model';
 
@@ -10,6 +11,9 @@ export interface FindAllOptions {
   order?: 'ASC' | 'DESC';
   globalFilter?: string;
   globalFilterFields?: string[];
+  filters?: {
+    [s: string]: FilterMetadata;
+  };
 }
 
 @Injectable({
@@ -25,9 +29,16 @@ export class ProductService {
     sort = '',
     order = 'ASC',
     globalFilterFields = [],
-    globalFilter = ''
+    globalFilter = '',
+    filters
   }: FindAllOptions) {
     let request = `${this.apiUrl}?limit=${size}&page=${page}`;
+    let params = new HttpParams();
+    for (const key in filters) {
+      if (filters[key] && filters[key].value) {
+        params = params.set(key, JSON.stringify(filters[key]));
+      }
+    }
 
     if (sort !== '') {
       request = request + `&sort=${sort}&order=${order}`;
@@ -39,7 +50,7 @@ export class ProductService {
         `&globalFilter=${globalFilter}&globalFilterFields=${globalFilterFields}`;
     }
 
-    return this.http.get<{ data: any[] }>(request);
+    return this.http.get<{ data: any[] }>(request, { params });
   }
 
   getProductById(id: string): Observable<Product> {
